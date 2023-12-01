@@ -1,7 +1,7 @@
 // LoginPage.js
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../services/api';
 import { login } from '../redux/actions/authActions';
 
@@ -9,13 +9,13 @@ const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
       const userData = await loginUser(email, password);
       dispatch(login(userData.email)); // Assuming the returned data has an email field
-      history.push('/dashboard');
+      navigate('/dashboard');
     } catch (error) {
       // Handle login error
       console.error('Login error:', error.message);

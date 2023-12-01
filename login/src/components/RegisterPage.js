@@ -1,17 +1,17 @@
 // RegisterPage.js
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../services/api';
 
 const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleRegister = async () => {
     try {
       await registerUser(email, password);
-      history.push('/login');
+      navigate('/login');
     } catch (error) {
       // Handle registration error
       console.error('Registration error:', error.message);
